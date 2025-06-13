@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>蠑螈</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            scroll-behavior: smooth;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* --- Hielo  --- */
+        .slider {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .slides {
+            display: flex;
+            width: 300vw;
+            height: 100%;
+            transition: transform 0.6s ease-in-out;
+        }
+        .slides img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        /* --- 標題文字區塊 --- */
+        .slider-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 5;
+            opacity: 0;
+            animation: fadeIn 2s ease forwards;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        }
+
+        .slider-title h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+        }
+
+        .slider-title p {
+            font-size: 1.5em;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translate(-50%, -60%); }
+            100% { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+
+        .nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 10;
+            padding: 0 20px;
+        }
+        .nav button {
+            background-color: rgba(255,255,255,0.4);
+            border: none;
+            font-size: 32px;
+            padding: 10px 16px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        /* --- 滑動提示箭頭 --- */
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            z-index: 10;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* --- 文字區塊 --- */
+        .section-two {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 100px 10%;
+            background-color: #f9f9f9;
+            gap: 40px; /* 區塊間隔 */
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px;
+            padding: 30px;
+            background-color: #ffffffcc;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .column h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #222;
+        }
+        .column p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .section-gallery {
+            padding: 60px 10%;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .gallery-title {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            color: #222;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-items: center;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            max-width: 300px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+        .section-footer {
+            background-color: #111;
+            color: #fff;
+            padding: 100px 10%;
+            text-align: center;
+            font-size: 1.2em;
+            letter-spacing: 1px;
+        }
+
+
+    </style>
+
+
+</head>
+<body>
+
+<div class="slider">
+    <div class="slides" id="slide-track">
+        <img src="img/A.png" height="612" width="1400"/>
+        <img src="img/B.png" height="592" width="1376"/>
+        <img src="img/C.png" height="597" width="1402"/>
+    </div>
+
+    <div class="slider-title">
+        <h1>我朋友養的蠑螈叫粉圓</h1>
+        <p>很可愛對不對 回答我 !</p>
+    </div>
+
+    <div class="nav">
+        <button onclick="prevSlide()">&#10094;</button>
+        <button onclick="nextSlide()">&#10095;</button>
+    </div>
+
+    <div class="scroll-down" onclick="scrollToSection()">&#x25BC;</div>
+</div>
+
+<section class="section-two" id="content">
+    <div class="column">
+        <h2>關於蠑螈</h2>
+        <p>
+            學名為 Ambystoma mexicanum，是一種來自墨西哥湖泊地區的兩棲動物。
+        </p>
+        <p>
+            牠們用嘴巴「吸」食物，看起來就像在小小地「吸珍奶」一樣，非常可愛。
+        </p>
+        <p>
+            有驚人的再生能力，能夠再生四肢,尾巴,鰓,甚至是心臟與部分腦組織。
+        </p>
+    </div>
+    <div class="column">
+        <h2>飼養歷程</h2>
+        <p>
+            十分傲嬌,食物送到嘴邊還不屑吃 (其實是他視力很差)
+        </p>
+        <p>
+            剛養的時候5cm不到的長度,600多天後的今天已經長到30cm了。
+        </p>
+        <p>
+            一直以為粉圓是女生,結果養了他大半輩子後才發現他是小王子......
+        </p>
+    </div>
+</section>
+            <section class="section-gallery">
+                <h2 class="gallery-title">粉圓素顏照</h2>
+                <div class="gallery-grid">
+                    <img src="img/IMG_8163.jpg" alt="picD"/>
+                    <img src="img/IMG_8178.jpg" alt="picD"/>
+                    <img src="img/IMG_8165.jpg" alt="picE"/>
+                    <img src="img/IMG_8170.jpg" alt="picF"/>
+                    <img src="img/IMG_8172.jpg" alt="picG"/>
+                    <img src="img/IMG_8174.jpg" alt="picH"/>
+                </div>
+            </section>
+
+        </section>
+
+
+    </section>
+
+</section>
+
+<script>
+    const slideTrack = document.getElementById('slide-track');
+    let currentIndex = 0;
+    const totalSlides = 3;
+
+    function updateSlide() {
+        slideTrack.style.transform = `translateX(-${currentIndex * 100}vw)`;
+    }
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateSlide();
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlide();
+    }
+
+    setInterval(nextSlide, 5000);
+
+    function scrollToSection() {
+        document.getElementById('content').scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+<footer class="section-footer">
+    <p>阿螈</p>
+</footer>
+
+</html>
